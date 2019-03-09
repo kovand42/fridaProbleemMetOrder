@@ -9,9 +9,6 @@
         <module name="frida" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="frida" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
