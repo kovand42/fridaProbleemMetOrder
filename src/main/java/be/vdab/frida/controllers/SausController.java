@@ -27,7 +27,7 @@ class SausController {
     ModelAndView saus(@PathVariable long id){
         ModelAndView modelAndView = new ModelAndView("saus");
         Arrays.stream(sauzen).filter(saus->saus.getId()==id).findFirst()
-                .ifPresent(saus->modelAndView.addObject("saus", saus));
+                .ifPresent(saus->modelAndView.addObject(saus));
         return modelAndView;
     }
 }

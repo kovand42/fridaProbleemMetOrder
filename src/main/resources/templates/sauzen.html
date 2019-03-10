@@ -6,12 +6,11 @@
 <h1>Sauzen</h1>
 <ul>
     <li th:each="saus:${sauzen}" th:object="${saus}">
-        <span th:text="*{naam}"></span>
+        <a th:href="@{/sauzen/{id}(id=*{id})}" th:text="*{naam}"></a>
         <ul>
             <li th:each="ingredient:*{ingredienten}"
                 th:text="${ingredient}"></li>
         </ul>
-        <a th:href="@{/sauzen/{id}(id=*{id})}">detail</a>
     </li>
 </ul>
 </body>
