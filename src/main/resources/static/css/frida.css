@@ -118,3 +118,9 @@ ul.zebra li:nth-child(even) {
 ul.zebra li:nth-child(odd):hover, ul.zebra li:nth-child(even):hover {
     background-color: #ccff00;
 }
+.naastMekaar {
+    padding-left: 0;
+}
+.naastMekaar {
+    display: inline;
+}
