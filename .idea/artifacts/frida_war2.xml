@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="frida:war2">
-    <output-path>$PROJECT_DIR$/out/artifacts/frida_war2</output-path>
-    <root id="archive" name="frida_war.war">
-      <element id="artifact" artifact-name="frida:war exploded" />
-    </root>
-  </artifact>
-</component>
