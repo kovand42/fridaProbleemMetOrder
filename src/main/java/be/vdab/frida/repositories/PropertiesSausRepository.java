@@ -14,15 +14,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-@Order(1)
+
+@Order(2)
 @Component
-class CSVSausRepository implements SausRepository {
-    private static final Path PAD = Paths.get("c:/data/Osebolle_O.csv");
+public class PropertiesSausRepository implements SausRepository {
+    private static final Path PAD = Paths.get("c:/data/sauzen.properties");
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
-    public List<Saus> findAll() {
-        List<Saus> sauzen = new ArrayList<>();
-        try {       return Files.lines(PAD)
+    public List<Saus> findAll(){
+        try {
+            return Files.lines(PAD)
                 .filter(regel -> ! regel.isEmpty())
                 .map(regel -> maakSaus(regel))
                 .collect(Collectors.toList());
@@ -33,19 +34,23 @@ class CSVSausRepository implements SausRepository {
         }
     }
     private Saus maakSaus(String regel) {
-        String[] onderdelen = regel.split(",");
+        String[] onderdelen = regel.split(":");
         if (onderdelen.length < 2) {
             String fout = PAD + ":" + regel + " bevat minder dan 2 onderdelen";
             logger.error(fout);
             throw new SausRepositoryException(fout);
         }
         try {
-            List<String> ingredienten = new ArrayList<>(onderdelen.length - 2);
-            for (int index = 2; index < onderdelen.length; index++) {
-                ingredienten.add(onderdelen[index]);
+            String[] naamEnIngredienten = onderdelen[1].split(",");
+            List<String> ingredienten = new ArrayList<>();
+            for (int index = 1; index != naamEnIngredienten.length; index++) {
+                ingredienten.add(naamEnIngredienten[index]);
             }
-            return new Saus(Long.parseLong(onderdelen[0]), onderdelen[1],
+            Saus saus = new Saus(Long.parseLong(onderdelen[0]), naamEnIngredienten[0],
                     ingredienten);
+            return saus;
+            /* new Saus(Long.parseLong(onderdelen[0]), onderdelen[1],
+                    ingredienten);*/
         } catch (NumberFormatException ex) {
             String fout = PAD + ":" + regel + " bevat verkeerde id";
             logger.error(fout, ex);
